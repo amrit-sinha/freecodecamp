@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import appleLogo from "../assets/appleLogo.svg";
 import googleLogo from "../assets/googleLogo.svg";
@@ -5,6 +6,7 @@ import microsoftLogo from "../assets/microsoftLogo.svg";
 import spotifyLogo from "../assets/spotifyLogo.svg";
 import amazonLogo from "../assets/amazonLogo.svg";
 const Landing = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -23,7 +25,7 @@ const Landing = () => {
           <img src={spotifyLogo} />
           <img src={amazonLogo} />
         </div>
-        <button onClick={() => (window.location.href = "/signin")}>
+        <button onClick={() => navigate("/signin")}>
           Get started (it's free)
         </button>
       </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-// import env from "react-dotenv";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [signup, setSignup] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ const SignIn = () => {
         );
         document.cookie = `token=${res.data.token}; path=/`;
         alert("Login successful");
-        window.location.href = "/learn";
+        navigate("/learn");
       } catch (err) {
         alert(err);
       }
@@ -63,7 +64,7 @@ const SignIn = () => {
           }
         );
         alert("Registration successful");
-        window.location.href = "/learn";
+        navigate("/learn");
       } catch (err) {
         alert(err);
       }
@@ -82,7 +83,6 @@ const SignIn = () => {
       );
       document.cookie = `token=${res.data.token}; path=/`;
       alert("Login successful");
-      // window.location.href = "/protected";
     } catch (err) {
       alert(err);
     }
