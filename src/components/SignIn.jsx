@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ const SignIn = () => {
           },
           { withCredentials: true }
         );
+        document.cookie = `token=${res.data.token}; path=/`;
         alert("Registration successful");
         navigate("/learn");
       } catch (err) {
@@ -78,11 +80,21 @@ const SignIn = () => {
 
   const handleGoogleSignIn = async (credentialResponse) => {
     try {
-      const res = await axios.post(`${apiRoute}/api/auth/google-signin`, {
-        credential: credentialResponse.credential,
-      });
+      const decoded = jwtDecode(credentialResponse.credential);
+      const { name: googleName, email: googleEmail } = decoded;
+      setName(googleName);
+      setEmail(googleEmail);
+      const res = await axios.post(
+        `${apiRoute}/api/auth/google-signin`,
+        {
+          name: googleName,
+          email: googleEmail,
+        },
+        { withCredentials: true }
+      );
       document.cookie = `token=${res.data.token}; path=/`;
       alert("Login successful");
+      navigate("/learn");
     } catch (err) {
       alert(err);
     }
