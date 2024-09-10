@@ -11,7 +11,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
-
+  const apiRoute = "https://freecodecamp-backend-esbl.onrender.com";
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(String(email).toLowerCase());
@@ -34,11 +34,12 @@ const SignIn = () => {
     if (validEmail && validPassword) {
       try {
         const res = await axios.post(
-          `https://freecodecamp-backend-esbl.onrender.com/api/auth/signin`,
+          `${apiRoute}/api/auth/signin`,
           {
             email,
             password,
-          }
+          },
+          { withCredentials: true }
         );
         document.cookie = `token=${res.data.token}; path=/`;
         alert("Login successful");
@@ -57,12 +58,13 @@ const SignIn = () => {
     if (validEmail && validPassword) {
       try {
         await axios.post(
-          `https://freecodecamp-backend-esbl.onrender.com/api/auth/signup`,
+          `${apiRoute}/api/auth/signup`,
           {
             name,
             email,
             password,
-          }
+          },
+          { withCredentials: true }
         );
         alert("Registration successful");
         navigate("/learn");
@@ -76,12 +78,9 @@ const SignIn = () => {
 
   const handleGoogleSignIn = async (credentialResponse) => {
     try {
-      const res = await axios.post(
-        `https://freecodecamp-backend-esbl.onrender.com/api/auth/google-signin`,
-        {
-          credential: credentialResponse.credential,
-        }
-      );
+      const res = await axios.post(`${apiRoute}/api/auth/google-signin`, {
+        credential: credentialResponse.credential,
+      });
       document.cookie = `token=${res.data.token}; path=/`;
       alert("Login successful");
     } catch (err) {
