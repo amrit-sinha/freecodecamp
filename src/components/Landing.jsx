@@ -8,7 +8,7 @@ import amazonLogo from "../assets/amazonLogo.svg";
 const Landing = () => {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="landing-page-container">
       <Navbar />
       <div className="landing-page">
         <h1>Learn to code — for free.</h1>
@@ -29,7 +29,7 @@ const Landing = () => {
           Get started (it's free)
         </button>
       </div>
-    </>
+    </div>
   );
 };
 export default Landing;

@@ -41,16 +41,29 @@
 }
 
 .signIn-button {
-  background-color: #fecc4c;
+  background-color: #f1a02a;
   color: black;
   border: 1px solid #f1a02a;
   height: 30px;
   width: 70px;
 }
 
+.signIn-button:hover {
+  background-color: #fecc4c;
+  cursor: pointer;
+}
+
+.landing-page-container {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  display: flex;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
 .landing-page {
   background-color: #1b1b32;
-  bottom: 100;
   width: 100vw;
   height: 100vh;
   padding-top: 80px;
@@ -100,10 +113,16 @@
 .landing-page button {
   width: 500px;
   height: 55px;
-  background-color: #febf41;
+  background-color: #f1a02a;
   color: black;
   margin-top: 20px;
   margin-left: 50px;
+  font-size: larger;
+}
+
+.landing-page button:hover {
+  background-color: #fecc4c;
+  cursor: pointer;
 }
 
 .learn {
