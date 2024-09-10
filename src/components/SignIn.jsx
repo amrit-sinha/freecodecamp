@@ -34,7 +34,7 @@ const SignIn = () => {
     if (validEmail && validPassword) {
       try {
         const res = await axios.post(
-          `https://freecodecamp-backend-amrit.netlify.app/api/auth/signin`,
+          `https://freecodecamp-backend-esbl.onrender.com/api/auth/signin`,
           {
             email,
             password,
@@ -44,6 +44,7 @@ const SignIn = () => {
         alert("Login successful");
         navigate("/learn");
       } catch (err) {
+        console.log(err);
         alert(err);
       }
     } else {
@@ -56,7 +57,7 @@ const SignIn = () => {
     if (validEmail && validPassword) {
       try {
         await axios.post(
-          `https://freecodecamp-backend-amrit.netlify.app/api/auth/signup`,
+          `https://freecodecamp-backend-esbl.onrender.com/api/auth/signup`,
           {
             name,
             email,
@@ -76,7 +77,7 @@ const SignIn = () => {
   const handleGoogleSignIn = async (credentialResponse) => {
     try {
       const res = await axios.post(
-        `https://freecodecamp-backend-amrit.netlify.app/api/auth/google-signin`,
+        `https://freecodecamp-backend-esbl.onrender.com/api/auth/google-signin`,
         {
           credential: credentialResponse.credential,
         }
