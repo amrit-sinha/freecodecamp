@@ -45,8 +45,7 @@ const SignIn = () => {
         alert("Login successful");
         navigate("/learn");
       } catch (err) {
-        console.log(err);
-        alert(err);
+        alert(err.response.data.msg);
       }
     } else {
       alert("Please correct the errors before submitting");
@@ -66,7 +65,7 @@ const SignIn = () => {
         alert("Registration successful");
         navigate("/learn");
       } catch (err) {
-        alert(err);
+        alert(err.response.data.msg);
       }
     } else {
       alert("Please correct the errors before submitting");
@@ -87,7 +86,7 @@ const SignIn = () => {
       alert("Login successful");
       navigate("/learn");
     } catch (err) {
-      alert(err);
+      alert(err.response.data.msg);
     }
   };
   return (
