@@ -101,7 +101,8 @@ const SignIn = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="230060964801-dg2jcih3muqp37ofrs2b133r6uq4q8kh.apps.googleusercontent.com">
+    <div className="login-window">
+      <GoogleOAuthProvider clientId="230060964801-dg2jcih3muqp37ofrs2b133r6uq4q8kh.apps.googleusercontent.com">
       <div className="login-container">
         <img
           src="https://cdn.freecodecamp.org/platform/universal/logo-512X512.png"
@@ -233,6 +234,8 @@ const SignIn = () => {
         )}
       </div>
     </GoogleOAuthProvider>
+    </div>
+    
   );
 };
 

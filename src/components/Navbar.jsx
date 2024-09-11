@@ -8,6 +8,7 @@ const Navbar = () => {
         placeholder="Search 10,700+ tutorials"
         type="search"
         value=""
+        onChange={() => {}}
       ></input>
       <img src={logo}></img>
       <div className="nav-buttons">

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import appleLogo from "../assets/appleLogo.svg";
 import googleLogo from "../assets/googleLogo.svg";
 import microsoftLogo from "../assets/microsoftLogo.svg";
@@ -9,7 +8,6 @@ const Landing = () => {
   const navigate = useNavigate();
   return (
     <div className="landing-page-container">
-      <Navbar />
       <div className="landing-page">
         <h1>Learn to code — for free.</h1>
         <h1>Build projects.</h1>

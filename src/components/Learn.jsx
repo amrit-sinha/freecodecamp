@@ -1,13 +1,35 @@
-const CourseCard = ({ title }) => {
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const CourseCard = ({ title, duration }) => {
   return (
     <div className="course-card-container">
-      <div className="course-card">{title}</div>
+      <div className="course-card">
+        <p>{title}</p>
+        <p>({duration} hours)</p>
+      </div>
     </div>
   );
 };
 
+const fetchCourses = async () => {
+  const apiRoute = "https://freecodecamp-backend-esbl.onrender.com";
+  const res = await axios.get(`${apiRoute}/api/auth/learn`);
+  return res.data.courses;
+};
+
 const Learn = () => {
-  const courses = ["hello", "world", "freecodecamp"];
+  const [courseList, setCourseList] = useState([]);
+
+  useEffect(() => {
+    const getCourses = async () => {
+      const courses = await fetchCourses();
+      setCourseList(courses);
+    };
+
+    getCourses();
+  }, []);
+
   return (
     <div className="learn">
       <h1>Welcome to freeCodeCamp.org</h1>
@@ -18,11 +40,16 @@ const Learn = () => {
         </footer>
       </span>
       <div>
-        {courses.map((item) => {
-          return <CourseCard title={item} />;
-        })}
+        {courseList.map((item) => (
+          <CourseCard
+            key={item._id}
+            title={item.title}
+            duration={item.duration}
+          />
+        ))}
       </div>
     </div>
   );
 };
+
 export default Learn;
