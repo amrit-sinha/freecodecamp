@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CourseCard = ({ title, duration }) => {
   return (
@@ -20,15 +22,24 @@ const fetchCourses = async () => {
 
 const Learn = () => {
   const [courseList, setCourseList] = useState([]);
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
-    const getCourses = async () => {
-      const courses = await fetchCourses();
-      setCourseList(courses);
-    };
+    if (!isAuthenticated) {
+      navigate("/signin");
+    } else {
+      const getCourses = async () => {
+        const courses = await fetchCourses();
+        setCourseList(courses);
+      };
+      getCourses();
+    }
+  }, [isAuthenticated]);
 
-    getCourses();
-  }, []);
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="learn">

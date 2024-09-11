@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import appleLogo from "../assets/appleLogo.svg";
 import googleLogo from "../assets/googleLogo.svg";
 import microsoftLogo from "../assets/microsoftLogo.svg";
@@ -6,6 +7,7 @@ import spotifyLogo from "../assets/spotifyLogo.svg";
 import amazonLogo from "../assets/amazonLogo.svg";
 const Landing = () => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
     <div className="landing-page-container">
       <div className="landing-page">
@@ -23,8 +25,12 @@ const Landing = () => {
           <img src={spotifyLogo} />
           <img src={amazonLogo} />
         </div>
-        <button onClick={() => navigate("/signin")}>
-          Get started (it's free)
+        <button
+          onClick={() => {
+            isAuthenticated ? navigate("/learn") : navigate("/signin");
+          }}
+        >
+          {isAuthenticated ? "Explore Courses" : "Get started (it's free)"}
         </button>
       </div>
     </div>
