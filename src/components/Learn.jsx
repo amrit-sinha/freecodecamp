@@ -29,11 +29,17 @@ const Learn = () => {
     if (!isAuthenticated) {
       navigate("/signin");
     } else {
-      const getCourses = async () => {
-        const courses = await fetchCourses();
+      let courses = JSON.parse(localStorage.getItem("courses"));
+      if (!courses) {
+        const getCourses = async () => {
+          courses = await fetchCourses();
+          localStorage.setItem("courses", JSON.stringify(courses));
+          setCourseList(courses);
+        };
+        getCourses();
+      } else {
         setCourseList(courses);
-      };
-      getCourses();
+      }
     }
   }, [isAuthenticated]);
 
